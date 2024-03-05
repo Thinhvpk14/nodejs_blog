@@ -1,7 +1,17 @@
+const Course = require('../models/Course');
+
 class SiteController {
   //[GET] /news
   home(req, res) {
-    res.render('home');
+
+    Course.find({})
+      .then(courses => {
+        res.json(courses);
+      })
+      .catch(error => {
+        res.status(400).json({ error: 'ERROR' });
+      });
+
   }
 
   //[GET] /news/:search
